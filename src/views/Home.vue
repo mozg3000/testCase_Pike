@@ -48,12 +48,6 @@ export default {
   },
   data: ()=> ({
 		error: false,
-		options: {
-			sort: {
-				byName: false,
-				byYear: false
-			}
-		},
 		checkboxes: [
 			{
 				name: 'Отсортировать по названию',
