@@ -8,7 +8,7 @@
 				<div
 					v-for="(checkbox, i) in checkboxes"
 					:key="i"
-					class="d-flex"
+					class="d-flex flex-align-center"
 				>
 					<Checkbox 
 						:checked="checkbox.state"
