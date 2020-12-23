@@ -9,7 +9,6 @@
 					v-for="(checkbox, i) in checkboxes"
 					:key="i"
 					class="d-flex"
-					:item="checkbox"
 				>
 					<Checkbox 
 						:checked="checkbox.state"
