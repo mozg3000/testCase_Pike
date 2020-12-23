@@ -12,6 +12,12 @@ const routes = [
         name: 'home',
         component: ()=>import(/*webpackChunkName: "Home page"*/ '@/views/Home')
     },
+		{
+			path: '/movie/:id',
+			name: 'movie',
+			props: true,
+			component: ()=>import(/*webpackChunkName: "Single movie page"*/ '@/views/Movie')
+		}
     
 ]
 

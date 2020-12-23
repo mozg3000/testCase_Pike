@@ -28,5 +28,29 @@ export default {
 				}
 			}
 		)
+	},
+	fetchMovie: ({commit}, id) => {
+		return new Promise(
+			async (resolve, reject) => {
+				try{
+					commit('SET_LOADING_MOVIES_STATE', true);
+					let response = await axios({
+						method: 'get',
+						url: `https://floating-sierra-20135.herokuapp.com/api/movie/${id}`
+					});
+					if(response.status === 200 && response.data.success){
+						let movie = response.data.data;
+						commit('SET_LOADING_MOVIES_STATE', false);
+						resolve(movie);
+					}else{
+						commit('SET_LOADING_MOVIES_STATE', false);
+						reject(response);
+					}
+				}catch(e){
+					commit('SET_LOADING_MOVIES_STATE', false);
+					reject(e.response)
+				}
+			}
+		);
 	}
 }

@@ -62,7 +62,8 @@
 
 	a
 		text-decoration: none
-
+	.upper-case
+		text-transform: uppercase
 	.d-flex
 		display: flex
 	.flex-cln
