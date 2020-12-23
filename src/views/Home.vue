@@ -5,22 +5,20 @@
 				Фильмы
 			</h2>
 			<div class="options_box d-flex">
-				<Checkbox 
-					:checked="options.sort.byName"
-					:name="'byName'"
-					@change="sortHandler"
-				/>
-				<p class="options_label">
-					Отсортировать по названию
-				</p>
-				<Checkbox 
-					:checked="options.sort.byYear"
-					:name="'byYear'"
-					@change="sortHandler"
-				/>
-				<p class="options_label">
-					Отсортировать по году
-				</p>
+				<div
+					v-for="(checkbox, i) in checkboxes"
+					:key="i"
+					class="d-flex"
+					:item="checkbox"
+				>
+					<Checkbox 
+						:checked="checkbox.state"
+						@change="sortHandler(checkbox)"
+					/>
+					<p class="options_label">
+						{{checkbox.name}}
+					</p>
+				</div>
 			</div>
 		</div>
 		<div v-if="loadingMovies" class="d-flex flex-justify-center">
@@ -57,6 +55,16 @@ export default {
 				byYear: false
 			}
 		},
+		checkboxes: [
+			{
+				name: 'Отсортировать по названию',
+				state: false
+			},
+			{
+				name: 'Отсортировать по году',
+				state: false
+			}
+		]
   }),
   filters: {
 	},
@@ -72,16 +80,18 @@ export default {
 			dropFilters: 'DROP_FILTER_MOVIE',
 			filterByName: 'SET_FILTERED_BYNAME_MOVIES'
 		}),
-		sortHandler(name){
-			this.options.sort[name] = !this.options.sort[name];
-			this.unCheckAllExcept(name);
-			if(this.options.sort[name]){
-				switch(name){
-					case 'byName': {
+		sortHandler(checkbox){
+			console.log(checkbox);
+			checkbox.state = !checkbox.state
+			this.unCheckAllExcept(checkbox.name);
+			console.log(checkbox);
+			if(checkbox.state){
+				switch(checkbox.name){
+					case 'Отсортировать по названию': {
 						this.sortByName();
 						break;
 					}
-					case 'byYear': {
+					case 'Отсортировать по году': {
 						this.sortByYear();
 						break;
 					}
@@ -97,11 +107,11 @@ export default {
 			this.filterByName();
 		},
 		unCheckAllExcept(except){
-			for(let checkbox in this.options.sort){
-				if(checkbox !== except){
-					this.options.sort[checkbox] = false;
+			this.checkboxes.forEach((checkbox)=>{
+				if(checkbox.name !== except){
+					checkbox.state = false;
 				}
-			}
+			})
 		}
   },
   

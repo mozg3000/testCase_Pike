@@ -12,7 +12,7 @@
 			v-else
 			:icon="['fas', 'chevron-down']" 
 			:class="[{chevron_checked: checked}, 'chevron']"
-			@click="$emit('change', name)"
+			@click="$emit('change')"
 		/>
 	</div>
 </template>
