@@ -6,12 +6,12 @@
 			</h2>
 			<div class="options_box d-flex">
 				<div
-					v-for="(checkbox, i) in checkboxes"
+					v-for="(checkbox, i) in filteredMovies.sorters"
 					:key="i"
 					class="d-flex flex-align-center"
 				>
 					<Checkbox 
-						:checked="checkbox.state"
+						:checked="checkbox.on"
 						@change="sortHandler(checkbox)"
 					/>
 					<p class="options_label">
@@ -39,7 +39,8 @@
 <script>
 import {mapState, mapActions, mapMutations} from 'vuex';
 import MovieCardList from '@/components/MovieCardList';
-import Checkbox from '@/components/Checkbox'
+import Checkbox from '@/components/Checkbox';
+import {DataProvider} from '@mozg3000/datastructures';
 export default {
   name: 'home',
   components: {
@@ -48,16 +49,6 @@ export default {
   },
   data: ()=> ({
 		error: false,
-		checkboxes: [
-			{
-				name: 'Отсортировать по названию',
-				state: false
-			},
-			{
-				name: 'Отсортировать по году',
-				state: false
-			}
-		]
   }),
   filters: {
 	},
@@ -69,50 +60,26 @@ export default {
   methods:{
 		...mapActions(['fetchMovies']),
 		...mapMutations({
-			filterByYear: 'SET_FILTERED_BYYEAR_MOVIES',
-			dropFilters: 'DROP_FILTER_MOVIE',
-			filterByName: 'SET_FILTERED_BYNAME_MOVIES'
+			toggleState: 'TOGGLE_SORTER_STATE'
 		}),
 		sortHandler(checkbox){
-			console.log(checkbox);
-			checkbox.state = !checkbox.state
-			this.unCheckAllExcept(checkbox.name);
-			console.log(checkbox);
-			if(checkbox.state){
-				switch(checkbox.name){
-					case 'Отсортировать по названию': {
-						this.sortByName();
-						break;
-					}
-					case 'Отсортировать по году': {
-						this.sortByYear();
-						break;
-					}
-				}
-			}else{
-				this.dropFilters();
-			}
+			this.toggleState(checkbox.name);
 		},
-		sortByYear(){
-			this.filterByYear();
-		},
-		sortByName(){
-			this.filterByName();
-		},
-		unCheckAllExcept(except){
-			this.checkboxes.forEach((checkbox)=>{
-				if(checkbox.name !== except){
-					checkbox.state = false;
-				}
-			})
-		}
   },
   
   mounted(){
-  
+	
   },
+	updated(){
+		console.log('44444444444444444444')
+	},
   created(){
 		this.fetchMovies()
+			.then(
+				(movies) => {
+				
+				}
+			)
 			.catch(
 				(e) => {
 					this.error = true;

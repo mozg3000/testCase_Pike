@@ -1,6 +1,6 @@
 import axios from 'axios';
 import router from "../router";
-
+import {DataProvider} from '@mozg3000/datastructures';
 export default {
 	
 	fetchMovies: ({commit}) => {

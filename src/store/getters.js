@@ -1,3 +1,3 @@
 export default {
-	getMovieById: state => id => state.movies.find((movie) => movie.id === id)
+	getMovieById: state => id => state.filteredMovies.find((movie) => movie.id === id)
 }

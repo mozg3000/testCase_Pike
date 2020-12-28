@@ -1,3 +1,4 @@
+import {DataProvider} from '@mozg3000/datastructures';
 let initState = {
 	
 }
@@ -6,26 +7,35 @@ export default {
 		state.loadingMovies = stateValue
 	},
 	SET_MOVIES: (state, movies) => {
-		state.movies = movies
-		state.filteredMovies = [...movies]
-	},
-	SET_FILTERED_BYNAME_MOVIES: (state) => {
-		let movies = [...state.movies]
-		state.filteredMovies = movies.sort(
-			(movie1, movie2) => {
-				return movie1.title === movie2.title? 0 : movie1.title < movie2.title? -1 : 1;
+		state.movies = movies;
+		state.filteredMovies = new DataProvider(
+			{
+				data: [...movies],
+				sorters
 			}
 		)
 	},
-	SET_FILTERED_BYYEAR_MOVIES: (state) => {
-		let movies = [...state.movies]
-		state.filteredMovies = movies.sort(
-			(movie1, movie2) => {
-				return movie1.year === movie2.year? 0 : movie1.year < movie2.year? -1 : 1;
+	TOGGLE_SORTER_STATE: (state, name) => {
+		state.filteredMovies.sorters.forEach(
+			(sorter) => {
+				sorter.on = name === sorter.name? !sorter.on:false;
 			}
-		)
-	},
-	DROP_FILTER_MOVIE: (state) => {
-		state.filteredMovies = [...state.movies];
+		);
 	}
 }
+const sorters = [
+	{
+		name: 'Отсортировать по названию',
+		on: false,
+		sorter: (movie1, movie2) => {
+							return movie1.title === movie2.title? 0 : movie1.title < movie2.title? -1 : 1;
+						}
+	},
+	{
+		name: 'Отсортировать по году',
+		on: false,
+		sorter: (movie1, movie2) => {
+							return movie1.year === movie2.year? 0 : movie1.year < movie2.year? -1 : 1;
+						}
+	}
+]

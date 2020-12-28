@@ -17,10 +17,16 @@ export default {
 	},
 	props: {
 		movies: {
-			type: Array,
+			type: Object,
 			required: true
 		}
 	},
+	updated(){
+		console.log(5555555)
+	},
+	created(){
+
+	}
 }
 </script>
 <style scoped lang="sass">
