@@ -22,7 +22,7 @@ export default {
 		}
 	},
 	updated(){
-		console.log(5555555)
+		//console.log(this.movies)
 	},
 	created(){
 

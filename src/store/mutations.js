@@ -16,11 +16,7 @@ export default {
 		)
 	},
 	TOGGLE_SORTER_STATE: (state, name) => {
-		state.filteredMovies.sorters.forEach(
-			(sorter) => {
-				sorter.on = name === sorter.name? !sorter.on:false;
-			}
-		);
+		state.filteredMovies.toggleSorters(name)
 	}
 }
 const sorters = [

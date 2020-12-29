@@ -13,7 +13,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.15.1",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@fortawesome/vue-fontawesome": "^2.0.2",
-    "@mozg3000/datastructures": "^0.3.6",
+    "@mozg3000/datastructures": "^1.0.0",
     "axios": "^0.19.2",
     "core-js": "^3.8.1",
     "vue": "^2.6.12",

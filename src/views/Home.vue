@@ -71,7 +71,6 @@ export default {
 	
   },
 	updated(){
-		console.log('44444444444444444444')
 	},
   created(){
 		this.fetchMovies()
